@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';
-import { Calendar, User, ArrowRight, BookOpen } from 'lucide-react';
+import { Calendar, User, ArrowRight } from 'lucide-react';
 import type { Content } from '../../services/api';
 
 interface ArticleCardProps {
     article: Content;
-    index: number;
+    index?: number;
 }
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
@@ -25,6 +25,9 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
             return dateString;
         }
     };
+
+    // Mark `index` as used (may be passed by callers) to avoid TS6133 unused variable error
+    void index;
 
     return (
         <div className="relative">
