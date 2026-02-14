@@ -4,7 +4,8 @@
  */
 
 // Use proxy in development, direct URL in production
-const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "/api" : "http://localhost:8000/api");
+// Production backend runs on port 5000 / or use VITE_API_URL to override
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "/api" : "https://api.taxemployee.com/api");
 const CONTENT_URL = `${API_BASE_URL}/content`;
 const CONTACT_URL = `${API_BASE_URL}/contact`;
 
@@ -211,7 +212,7 @@ export const uploadImage = async (file: File): Promise<string> => {
 
         const uploadUrl = import.meta.env.VITE_API_URL
             ? `${import.meta.env.VITE_API_URL}/upload/image`
-            : (import.meta.env.DEV ? "/api/upload/image" : "http://localhost:8000/api/upload/image");
+            : (import.meta.env.DEV ? "/api/upload/image" : "https://api.taxemployee.com/api/upload/image");
 
         const response = await fetch(uploadUrl, {
             method: 'POST',
@@ -312,7 +313,7 @@ export const sendContactMessage = async (data: ContactData) => {
  */
 export const fetchMenus = async () => {
     try {
-        const menusUrl = import.meta.env.DEV ? "/menus" : "http://localhost:8000/menus";
+        const menusUrl = import.meta.env.DEV ? "/menus" : "https://api.taxemployee.com/menus";
         const response = await fetch(menusUrl);
 
         if (!response.ok) {
@@ -330,7 +331,7 @@ export const fetchMenus = async () => {
  */
 export const healthCheck = async (): Promise<boolean> => {
     try {
-        const healthUrl = import.meta.env.DEV ? "/health" : "http://localhost:8000/health";
+        const healthUrl = import.meta.env.DEV ? "/health" : "https://api.taxemployee.com/health";
         const response = await fetch(healthUrl);
         return response.ok;
     } catch (error) {
