@@ -8,30 +8,6 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "/api" : "https://api.taxemployee.com/api");
 const CONTENT_URL = `${API_BASE_URL}/content`;
 const CONTACT_URL = `${API_BASE_URL}/contact`;
-const AUTH_URL = `${API_BASE_URL}/auth`;
-
-// Helper to extract meaningful error messages
-const extractErrorMessage = (error: any): string => {
-    if (error instanceof TypeError) {
-        if (error.message.includes('Failed to fetch')) {
-            return 'Network error: Cannot reach the server. Check your internet connection and API URL.';
-        }
-        return 'Network error: ' + error.message;
-    }
-    return error?.message || 'An unexpected error occurred';
-};
-const AUTH_URL = `${API_BASE_URL}/auth`;
-
-// Helper to handle network errors
-const handleFetchError = (error: any): string => {
-    if (error instanceof TypeError) {
-        if (error.message.includes('Failed to fetch')) {
-            return 'Network error: Cannot reach the server. Please check your internet connection.';
-        }
-        return 'Network error: ' + error.message;
-    }
-    return error.message || 'An unexpected error occurred';
-};
 
 // Helper to check if response is OK and try to parse JSON
 const parseResponse = async (response: Response) => {
