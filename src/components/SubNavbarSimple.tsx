@@ -12,7 +12,7 @@ const SubNavbarSimple: React.FC = () => {
                     <div className="flex items-center gap-3">
                         <Logo size="sm" showText={false} />
                         <div>
-                            <h2 className="text-lg font-bold text-primary-900">TaxEmploy</h2>
+                            <h2 className="text-lg font-bold text-primary-900">TaxEmployee</h2>
                             <p className="text-xs text-primary-600">Smart tax solutions & compliance</p>
                         </div>
                     </div>

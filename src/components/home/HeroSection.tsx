@@ -21,7 +21,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ articleCount = 0 }) =>
                 <div className="text-center mb-8 animate-fade-in">
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 text-violet-700 rounded-full font-semibold text-sm mb-6">
                         <Sparkles size={16} />
-                        <span>Welcome to TaxEmploy</span>
+                        <span>Welcome to TaxEmployee</span>
                     </div>
                 </div>
 

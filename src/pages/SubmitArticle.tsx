@@ -77,7 +77,13 @@ const SubmitArticle: React.FC = () => {
             // Clear the input
             e.target.value = '';
         } catch (err: any) {
-            setError(`Image upload failed: ${err.message || 'Unknown error'}`);
+            let errorMsg = 'Image upload failed';
+            if (err instanceof TypeError && err.message.includes('Failed to fetch')) {
+                errorMsg += ': Network error. Check your internet connection.';
+            } else if (err.message) {
+                errorMsg += ': ' + err.message;
+            }
+            setError(errorMsg);
             console.error('Image upload error:', err);
         } finally {
             setUploadingImages(false);

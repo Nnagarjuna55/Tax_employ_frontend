@@ -2,8 +2,9 @@
  * Health check utilities for diagnosing connection issues
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
-const BACKEND_URL = API_BASE_URL.replace('/api', '');
+const BACKEND_BASE_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || (typeof window !== 'undefined' && window.location.hostname === 'localhost' ? "http://localhost:8000" : "https://api.taxemployee.com");
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "/api" : "https://api.taxemployee.com/api");
+const BACKEND_URL = BACKEND_BASE_URL;
 
 export interface HealthStatus {
     backend: boolean;

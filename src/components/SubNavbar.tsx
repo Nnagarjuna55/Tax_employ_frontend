@@ -11,7 +11,7 @@ const SubNavbar: React.FC = () => {
                 <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
                     <div className="flex items-center gap-6">
                         <div>
-                            <h2 className="text-2xl font-extrabold text-blue-600">TaxEmploy</h2>
+                            <h2 className="text-2xl font-extrabold text-blue-600">TaxEmployee</h2>
                             <p className="text-xs text-gray-500">Complete tax solution</p>
                         </div>
                     </div>

@@ -51,7 +51,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
         try {
             const loginUrl = import.meta.env.VITE_API_URL
                 ? `${import.meta.env.VITE_API_URL}/auth/login`
-                : (import.meta.env.DEV ? "/api/auth/login" : "http://localhost:8000/api/auth/login");
+                : (import.meta.env.DEV ? "/api/auth/login" : "https://api.taxemployee.com/api/auth/login");
+
+            console.log('Login URL:', loginUrl);
+
             const response = await fetch(loginUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -59,8 +62,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || 'Login failed');
+                let errorMessage = 'Login failed';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.detail || errorData.message || `Server error: ${response.status}`;
+                } catch {
+                    errorMessage = `Server error: ${response.status} ${response.statusText}`;
+                }
+                throw new Error(errorMessage);
             }
 
             const data = await response.json();
@@ -76,7 +85,18 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 navigate('/submit-article');
             }, 800);
         } catch (err: any) {
-            setError(err.message || 'Login failed. Please try again.');
+            let errorMsg = 'Login failed. Please try again.';
+            if (err instanceof TypeError) {
+                if (err.message.includes('Failed to fetch')) {
+                    errorMsg = 'Network error: Cannot reach server. Check your internet and verify the API URL.';
+                } else {
+                    errorMsg = 'Network error: ' + err.message;
+                }
+            } else if (err.message) {
+                errorMsg = err.message;
+            }
+            setError(errorMsg);
+            console.error('Login error:', err);
         } finally {
             setLoading(false);
         }

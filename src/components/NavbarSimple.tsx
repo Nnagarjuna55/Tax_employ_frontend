@@ -89,7 +89,7 @@ const NavbarSimple: React.FC = () => {
                     >
                         <Logo size="md" showText={true} className="text-white" />
                     </Link>
-                    <h1 className="text-lg font-bold text-white">TaxEmploy</h1>
+                    <h1 className="text-lg font-bold text-white">TaxEmployee</h1>
 
                     {/* Desktop Menu */}
                     <div className="hidden lg:flex items-center space-x-1 flex-1 ml-8">
