@@ -99,7 +99,9 @@ export const fetchContent = async (
         if (params?.q) queryParams.append("q", params.q);
 
         const queryString = queryParams.toString() ? `?${queryParams.toString()}` : "";
-        const response = await fetch(`${CONTENT_URL}/${category}/${type}${queryString}`);
+        const response = await fetch(`${CONTENT_URL}/${category}/${type}${queryString}`, {
+            credentials: 'include',
+        });
 
         if (!response.ok) {
             throw new Error(`Error fetching content: ${response.statusText}`);
@@ -162,7 +164,9 @@ export const fetchContentByCategory = async (
         if (params?.limit) queryParams.append("limit", params.limit.toString());
 
         const queryString = queryParams.toString() ? `?${queryParams.toString()}` : "";
-        const response = await fetch(`${CONTENT_URL}/category/${category}${queryString}`);
+        const response = await fetch(`${CONTENT_URL}/category/${category}${queryString}`, {
+            credentials: 'include',
+        });
 
         if (!response.ok) {
             throw new Error(`Error fetching content: ${response.statusText}`);
@@ -218,6 +222,7 @@ export const uploadImage = async (file: File): Promise<string> => {
                 'Authorization': `Bearer ${token}`,
             },
             body: formData,
+            credentials: 'include',
         });
 
         if (!response.ok) {
@@ -266,6 +271,7 @@ export const createContent = async (data: {
                 "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify(data),
+            credentials: 'include',
         });
 
         console.log('Create response status:', response.status);
@@ -292,6 +298,7 @@ export const sendContactMessage = async (data: ContactData) => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
+            credentials: 'include',
         });
 
         if (!response.ok) {
@@ -312,7 +319,9 @@ export const sendContactMessage = async (data: ContactData) => {
 export const fetchMenus = async () => {
     try {
         const menusUrl = import.meta.env.DEV ? "/menus" : `${API_BASE_URL.replace('/api', '')}/menus`;
-        const response = await fetch(menusUrl);
+        const response = await fetch(menusUrl, {
+            credentials: 'include',
+        });
 
         if (!response.ok) {
             throw new Error("Failed to fetch menus");
@@ -330,7 +339,9 @@ export const fetchMenus = async () => {
 export const healthCheck = async (): Promise<boolean> => {
     try {
         const healthUrl = import.meta.env.DEV ? "/health" : `${API_BASE_URL.replace('/api', '')}/health`;
-        const response = await fetch(healthUrl);
+        const response = await fetch(healthUrl, {
+            credentials: 'include',
+        });
         return response.ok;
     } catch (error) {
         console.error("Health check failed:", error);
