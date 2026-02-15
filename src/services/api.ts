@@ -62,6 +62,7 @@ export const fetchAllContent = async (
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 'Pragma': 'no-cache',
             },
+            credentials: 'include',
         });
 
         console.log('Response status:', response.status);
@@ -132,6 +133,7 @@ export const fetchContentById = async (id: string): Promise<Content | null> => {
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 'Pragma': 'no-cache',
             },
+            credentials: 'include',
         });
 
         console.log('Response status:', response.status);
